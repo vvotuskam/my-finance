@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.postgresql.Driver
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: 114ea424ebb03b6d481f
+            client-secret: 0ff7d2fc2152a9b52dde6a7ae90694dc79d7e3e5
+  jpa:
+    hibernate:
+      ddl-auto: update

@@ -2,7 +2,12 @@ package my.finance.accountservice.account.create.usecase
 
 import my.finance.accountservice.account.Account
 import my.finance.accountservice.account.AccountService
+import my.finance.accountservice.exception.BusinessException
+import my.finance.accountservice.failure.account.AccountAlreadyExistsFailure
+import my.finance.accountservice.failure.user.UserNotFoundFailure
+import my.finance.accountservice.success.SuccessResponse
 import my.finance.accountservice.user.UserService
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import java.util.UUID
 
@@ -17,14 +22,15 @@ class AccountCreateUseCase(
         val userId: UUID
     )
 
-    fun invoke(params: AccountCreateParams): String {
+    fun invoke(params: AccountCreateParams): SuccessResponse {
         val (name, userId) = params
 
-        val user = userService.findById(userId) ?: return "User not found"
+        val user = userService.findById(userId)
+            ?: throw BusinessException(UserNotFoundFailure())
 
         val isUniqueName = accountService.isUniqueName(name, user)
 
-        if (!isUniqueName) return "Already exists"
+        if (!isUniqueName) throw BusinessException(AccountAlreadyExistsFailure())
 
         val account = Account(
             name = params.name,
@@ -34,6 +40,6 @@ class AccountCreateUseCase(
 
         accountService.save(account)
 
-        return "Created"
+        return SuccessResponse(status = "Created")
     }
 }

@@ -1,4 +1,4 @@
-package my.finance.authservice.base
+package my.finance.authservice.base.failure
 
 interface Failure {
     val code: Int

@@ -17,9 +17,10 @@ class GlobalExceptionHandler {
         e: HttpMessageNotReadableException,
     ): ResponseEntity<Failure> {
         val mismatchedInputException = e.cause as MismatchedInputException
+        val cause = "Deserialization failure"
         val field = mismatchedInputException.path[0].fieldName
 
-        val failure = ValidationFailure(field)
+        val failure = ValidationFailure(field = field, cause = cause)
         return ResponseEntity.status(failure.code).body(failure)
     }
 

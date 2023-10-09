@@ -1,4 +1,4 @@
-package my.finance.accountservice.validator.base
+package my.finance.accountservice.validator
 
 import org.springframework.validation.BindingResult
 

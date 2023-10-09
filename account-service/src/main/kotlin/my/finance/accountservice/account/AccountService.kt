@@ -23,4 +23,8 @@ class AccountService(
     fun findById(id: UUID): Account? {
         return accountRepository.findByIdOrNull(id)
     }
+
+    fun findAll(): List<Account> {
+        return accountRepository.findAll()
+    }
 }

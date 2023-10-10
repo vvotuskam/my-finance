@@ -1,0 +1,5 @@
+spring:
+  security:
+    jwt:
+      expiration: 1
+      secret: VeryStrangeSecretForJWTHS512SignatureAlgorithm64ByteLength

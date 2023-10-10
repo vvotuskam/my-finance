@@ -6,4 +6,8 @@ import org.springframework.stereotype.Service
 class UserService(
     private val userRepository: UserRepository
 ) {
+
+    fun findByEmail(email: String): User? {
+        return userRepository.findByEmail(email)
+    }
 }

@@ -16,6 +16,9 @@ data class User(
 
     val password: String,
 
+    @Enumerated(EnumType.STRING)
+    val role: Role,
+
     @OneToMany(mappedBy = "user")
     val tokens: List<Token>
 )

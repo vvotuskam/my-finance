@@ -6,4 +6,8 @@ import org.springframework.stereotype.Service
 class TokenService(
     private val tokenRepository: TokenRepository
 ) {
+
+    fun save(token: Token): Token {
+        return tokenRepository.save(token)
+    }
 }

@@ -1,4 +1,9 @@
 package my.finance.authservice.auth.dto
 
-class AuthResponse {
-}
+import com.fasterxml.jackson.annotation.JsonProperty
+
+data class AuthResponse(
+
+    @JsonProperty("access_token")
+    val accessToken: String
+)

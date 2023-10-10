@@ -12,7 +12,6 @@ class AuthValidator : Validator {
     companion object {
         private const val EMAIL = "email"
         private const val PASSWORD = "password"
-        private const val DEFAULT_CAUSE = "Field is null, empty"
     }
 
     override fun validate(result: BindingResult) {
@@ -21,14 +20,14 @@ class AuthValidator : Validator {
                 BusinessException(
                     failure = ValidationFailure(
                         field = EMAIL,
-                        cause = DEFAULT_CAUSE
+                        cause = "Field is null, empty, or not email"
                     )
                 )
             result.hasFieldErrors(PASSWORD) ->
                 BusinessException(
                     failure = ValidationFailure(
                         field = EMAIL,
-                        cause = DEFAULT_CAUSE
+                        cause = "Field is null, empty"
                     )
                 )
             else -> return

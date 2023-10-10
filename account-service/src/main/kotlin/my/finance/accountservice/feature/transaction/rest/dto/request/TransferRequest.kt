@@ -10,9 +10,14 @@ data class TransferRequest(
     @field:UUID
     @field:NotNull
     @field:NotBlank
+    val from: String?,
+
+    @field:UUID
+    @field:NotNull
+    @field:NotBlank
     val to: String?,
 
     @field:NotNull
     @field:Min(value = 100)
-    val amount: Double,
+    val amount: Double?,
 )

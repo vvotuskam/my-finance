@@ -6,7 +6,7 @@ import io.jsonwebtoken.security.Keys
 import my.finance.authservice.user.User
 import org.springframework.stereotype.Component
 import java.security.Key
-import java.time.temporal.ChronoUnit.*
+import java.time.temporal.ChronoUnit.HOURS
 import java.util.*
 
 
@@ -22,6 +22,7 @@ class JwtUtils(
         )
 
         return Jwts.builder()
+            .setHeaderParam("typ", "JWT")
             .setSubject(user.email)
             .claim("role", user.role)
             .setIssuedAt(issuedAt)

@@ -1,4 +1,10 @@
+server:
+  port: 8080
+
 spring:
+  application:
+    name: account-service
+
   datasource:
     username: postgres
     password: postgres
@@ -6,6 +12,9 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   security:
+    jwt:
+      expiration: 1
+      secret: VeryStrangeSecretForJWTHS512SignatureAlgorithm64ByteLength
     oauth2:
       client:
         registration:

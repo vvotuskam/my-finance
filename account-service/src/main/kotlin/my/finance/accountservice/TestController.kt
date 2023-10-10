@@ -19,9 +19,15 @@ class TestController {
         return "Secure"
     }
 
-    @GetMapping("/secure/{ping}")
-    @PreAuthorize("isAuthenticated()")
-    fun pingSecure(@PathVariable ping: String): String {
-        return ping
+    @GetMapping("/user")
+    @PreAuthorize("hasRole('USER')")
+    fun user(): String {
+        return "Auth user"
+    }
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    fun admin(): String {
+        return "Auth admin"
     }
 }

@@ -1,7 +1,7 @@
 package my.finance.accountservice.account.get.dto
 
-import my.finance.accountservice.account.getbyid.dto.AccountGetByIdResponse
+import my.finance.accountservice.account.getbyname.dto.AccountGetByNameResponse
 
 data class AccountGetResponse(
-    val accounts: List<AccountGetByIdResponse>
+    val accounts: List<AccountGetByNameResponse>
 )

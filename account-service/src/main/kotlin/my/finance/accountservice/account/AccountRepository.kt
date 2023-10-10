@@ -8,5 +8,5 @@ import java.util.UUID
 @Repository
 interface AccountRepository : JpaRepository<Account, UUID> {
 
-    fun findByNameIgnoreCaseAndUser(name: String, user: User): Account?
+    fun findByNameIgnoreCase(name: String): Account?
 }

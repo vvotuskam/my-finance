@@ -1,27 +1,26 @@
-package my.finance.accountservice.account.getbyid.usecase
+package my.finance.accountservice.account.getbyname.usecase
 
 import my.finance.accountservice.account.AccountService
-import my.finance.accountservice.account.getbyid.dto.AccountGetByIdResponse
+import my.finance.accountservice.account.getbyname.dto.AccountGetByNameResponse
 import my.finance.accountservice.exception.BusinessException
 import my.finance.accountservice.failure.account.AccountNotFoundFailure
 import my.finance.accountservice.usecase.UseCase
 import org.springframework.stereotype.Component
-import java.util.*
 
 @Component
-class AccountGetByIdUseCase(
+class AccountGetByNameUseCase(
     private val accountService: AccountService
-): UseCase<AccountGetByIdUseCase.AccountGetByIdParams, AccountGetByIdResponse> {
+): UseCase<AccountGetByNameUseCase.AccountGetByIdParams, AccountGetByNameResponse> {
 
     data class AccountGetByIdParams(
-        val id: UUID
+        val name: String
     )
 
-    override fun invoke(params: AccountGetByIdParams): AccountGetByIdResponse {
-        val account = accountService.findById(id = params.id)
+    override fun invoke(params: AccountGetByIdParams): AccountGetByNameResponse {
+        val account = accountService.findByName(params.name)
             ?: throw BusinessException(AccountNotFoundFailure())
 
-        return AccountGetByIdResponse(
+        return AccountGetByNameResponse(
             id = account.id!!,
             name = account.name,
             amount = account.amount

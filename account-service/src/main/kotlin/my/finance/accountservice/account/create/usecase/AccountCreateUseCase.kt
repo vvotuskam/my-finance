@@ -8,6 +8,7 @@ import my.finance.accountservice.failure.account.AccountAlreadyExistsFailure
 import my.finance.accountservice.failure.user.UserNotFoundFailure
 import my.finance.accountservice.success.SuccessResponse
 import my.finance.accountservice.usecase.UseCase
+import my.finance.accountservice.user.User
 import my.finance.accountservice.user.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
@@ -16,31 +17,27 @@ import java.util.UUID
 @Component
 class AccountCreateUseCase(
     private val accountService: AccountService,
-    private val userService: UserService,
 ): UseCase<AccountCreateParams, SuccessResponse> {
 
     data class AccountCreateParams(
         val name: String,
-        val userId: UUID
+        val user: User
     )
 
     override fun invoke(params: AccountCreateParams): SuccessResponse {
-        val (name, userId) = params
+        val (name, user) = params
 
-        val user = userService.findById(userId)
-            ?: throw BusinessException(UserNotFoundFailure())
+        val account = accountService.findByName(name)
 
-        val isUniqueName = accountService.isUniqueName(name, user)
+        if (account != null) throw BusinessException(AccountAlreadyExistsFailure())
 
-        if (!isUniqueName) throw BusinessException(AccountAlreadyExistsFailure())
-
-        val account = Account(
+        val newAccount = Account(
             name = params.name,
             amount = 0.0,
             user = user
         )
 
-        accountService.save(account)
+        accountService.save(newAccount)
 
         return SuccessResponse(status = "Created")
     }

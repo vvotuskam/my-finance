@@ -1,4 +1,4 @@
-package my.finance.accountservice.account.getbyid.validator
+package my.finance.accountservice.account.getbyname.validator
 
 import my.finance.accountservice.exception.BusinessException
 import my.finance.accountservice.failure.ValidationFailure
@@ -7,19 +7,19 @@ import org.springframework.stereotype.Component
 import org.springframework.validation.BindingResult
 
 @Component
-class AccountGetByIdValidator : Validator {
+class AccountGetByNameValidator : Validator {
 
     companion object {
-        private const val ID = "id"
+        private const val NAME = "name"
     }
 
     override fun validate(result: BindingResult) {
         throw when {
-            result.hasFieldErrors(ID) ->
+            result.hasFieldErrors(NAME) ->
                 BusinessException(
                     failure = ValidationFailure(
-                        field = ID,
-                        cause = "Field is null, empty, or not uuid"
+                        field = NAME,
+                        cause = "Field is null or empty"
                     )
                 )
             else -> return

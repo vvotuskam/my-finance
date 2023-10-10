@@ -16,16 +16,9 @@ class AccountCreateValidator : Validator {
 
     override fun validate(result: BindingResult) {
 
-        throw when {
-            result.hasFieldErrors(NAME) ->
-                BusinessException(
-                    ValidationFailure(NAME, "Field is null or empty")
-                )
-            result.hasFieldErrors(USER_ID) ->
-                BusinessException(
-                    ValidationFailure(USER_ID, "Field is null, empty, or not uuid")
-                )
-            else -> return
-        }
+        if (result.hasFieldErrors(NAME))
+            throw BusinessException(
+                ValidationFailure(NAME, "Field is null or empty")
+            )
     }
 }

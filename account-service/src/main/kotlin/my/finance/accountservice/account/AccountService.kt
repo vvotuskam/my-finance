@@ -16,12 +16,8 @@ class AccountService(
         return accountRepository.save(account)
     }
 
-    fun isUniqueName(name: String, user: User): Boolean {
-        return accountRepository.findByNameIgnoreCaseAndUser(name, user) == null
-    }
-
-    fun findById(id: UUID): Account? {
-        return accountRepository.findByIdOrNull(id)
+    fun findByName(name: String): Account? {
+        return accountRepository.findByNameIgnoreCase(name)
     }
 
     fun findAll(): List<Account> {

@@ -2,7 +2,7 @@ package my.finance.accountservice.account.get
 
 import my.finance.accountservice.account.AccountService
 import my.finance.accountservice.account.get.dto.AccountGetResponse
-import my.finance.accountservice.account.getbyid.dto.AccountGetByIdResponse
+import my.finance.accountservice.account.getbyname.dto.AccountGetByNameResponse
 import my.finance.accountservice.usecase.NoParams
 import my.finance.accountservice.usecase.UseCase
 import org.springframework.stereotype.Component
@@ -14,7 +14,7 @@ class AccountGetUseCase(
 
     override fun invoke(params: NoParams): AccountGetResponse {
         val accounts = accountService.findAll()
-            .map { AccountGetByIdResponse(
+            .map { AccountGetByNameResponse(
                 id = it.id!!,
                 name = it.name,
                 amount = it.amount

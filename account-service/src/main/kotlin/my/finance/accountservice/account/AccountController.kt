@@ -6,12 +6,13 @@ import my.finance.accountservice.account.create.mapper.AccountCreateMapper
 import my.finance.accountservice.account.create.usecase.AccountCreateUseCase
 import my.finance.accountservice.account.create.validator.AccountCreateValidator
 import my.finance.accountservice.account.get.AccountGetUseCase
-import my.finance.accountservice.account.getbyid.dto.AccountGetByIdRequest
-import my.finance.accountservice.account.getbyid.mapper.AccountGetByIdMapper
-import my.finance.accountservice.account.getbyid.usecase.AccountGetByIdUseCase
-import my.finance.accountservice.account.getbyid.validator.AccountGetByIdValidator
+import my.finance.accountservice.account.getbyname.dto.AccountGetByNameRequest
+import my.finance.accountservice.account.getbyname.mapper.AccountGetByNameMapper
+import my.finance.accountservice.account.getbyname.usecase.AccountGetByNameUseCase
+import my.finance.accountservice.account.getbyname.validator.AccountGetByNameValidator
 import my.finance.accountservice.usecase.NoParams
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 
@@ -22,29 +23,32 @@ class AccountController(
     private val createMapper: AccountCreateMapper,
     private val createValidator: AccountCreateValidator,
 
-    private val getByIdUseCase: AccountGetByIdUseCase,
-    private val getByIdMapper: AccountGetByIdMapper,
-    private val getByIdValidator: AccountGetByIdValidator,
+    private val getByNameUseCase: AccountGetByNameUseCase,
+    private val getByNameMapper: AccountGetByNameMapper,
+    private val getByNameValidator: AccountGetByNameValidator,
 
     private val getUseCase: AccountGetUseCase,
 ) {
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     fun getAccount(): ResponseEntity<out Any> {
         return ResponseEntity.ok(getUseCase.invoke(NoParams))
     }
 
     @GetMapping("/info")
+    @PreAuthorize("isAuthenticated()")
     fun getAccount(
-        @RequestBody @Valid request: AccountGetByIdRequest,
+        @RequestBody @Valid request: AccountGetByNameRequest,
         result: BindingResult,
     ): ResponseEntity<out Any> {
-        getByIdValidator.validate(result)
-        val params = getByIdMapper.convert(request)
-        return ResponseEntity.ok(getByIdUseCase.invoke(params))
+        getByNameValidator.validate(result)
+        val params = getByNameMapper.convert(request)
+        return ResponseEntity.ok(getByNameUseCase.invoke(params))
     }
 
     @PostMapping("/create")
+    @PreAuthorize("isAuthenticated()")
     fun createAccount(
         @Valid @RequestBody request: AccountCreateRequest,
         result: BindingResult,

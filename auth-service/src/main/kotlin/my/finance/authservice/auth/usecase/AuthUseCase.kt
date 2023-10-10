@@ -28,7 +28,7 @@ class AuthUseCase(
 
     override fun invoke(params: AuthParams): AuthResponse {
         val user = userService.findByEmail(params.email)
-            ?: throw BusinessException(UserNotFoundFailure())
+            ?: throw BusinessException(BadCredentialsFailure())
 
         if (!passwordEncoder.matches(params.password, user.password)) {
             throw BusinessException(BadCredentialsFailure())

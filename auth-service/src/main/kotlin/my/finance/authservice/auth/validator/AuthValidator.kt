@@ -26,7 +26,7 @@ class AuthValidator : Validator {
             result.hasFieldErrors(PASSWORD) ->
                 BusinessException(
                     failure = ValidationFailure(
-                        field = EMAIL,
+                        field = PASSWORD,
                         cause = "Field is null, empty"
                     )
                 )

@@ -12,6 +12,9 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   security:
+    otp:
+      confirmation: 5
+      completion: 15
     jwt:
       expiration: 1
       secret: VeryStrangeSecretForJWTHS512SignatureAlgorithm64ByteLength

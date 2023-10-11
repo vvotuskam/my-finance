@@ -22,7 +22,5 @@ data class OtpCode(
 
     val expiresAt: LocalDateTime,
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    val user: User
+    val email: String
 )

@@ -10,4 +10,8 @@ class UserService(
     fun findByEmail(email: String): User? {
         return userRepository.findByEmail(email)
     }
+
+    fun save(user: User): User {
+        return userRepository.save(user)
+    }
 }

@@ -18,7 +18,7 @@ class PasswordValidator : Validator {
     }
 
     override fun validate(result: BindingResult) {
-        val password = result.getFieldValue(PASSWORD) as String
+        val password = result.getFieldValue(PASSWORD) as String?
 
         if (result.hasFieldErrors(PASSWORD) || !isValid(password))
             throw BusinessException(
@@ -29,13 +29,13 @@ class PasswordValidator : Validator {
             )
     }
 
-    private fun isValid(password: String): Boolean {
-        val chars = password.chars()
+    private fun isValid(password: String?): Boolean {
+        if (password == null) return false
 
-        val lowercase = chars.anyMatch { it.toChar().isLowerCase() }
-        val uppercase = chars.anyMatch { it.toChar().isUpperCase() }
-        val digit = chars.anyMatch { it.toChar().isDigit() }
-        val allowedChars = chars.allMatch { it.toChar().isLetterOrDigit() }
+        val lowercase = password.chars().anyMatch { it.toChar().isLowerCase() }
+        val uppercase = password.chars().anyMatch { it.toChar().isUpperCase() }
+        val digit = password.chars().anyMatch { it.toChar().isDigit() }
+        val allowedChars = password.chars().allMatch { it.toChar().isLetterOrDigit() }
 
         return lowercase && uppercase && digit && allowedChars
     }

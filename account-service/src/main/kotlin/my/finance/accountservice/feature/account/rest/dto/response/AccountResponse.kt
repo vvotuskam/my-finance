@@ -2,8 +2,8 @@ package my.finance.accountservice.feature.account.rest.dto.response
 
 import java.util.UUID
 
-data class AccountGetByNameResponse(
+data class AccountResponse(
     val id: UUID,
     val name: String,
-    val amount: Double,
+    val owner: String
 )

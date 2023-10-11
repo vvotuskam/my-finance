@@ -12,4 +12,6 @@ interface OtpCodeRepository : JpaRepository<OtpCode, UUID> {
     @Modifying
     @Query("update OtpCode set status = 'REVOKED' where email = :email")
     fun revokeOtpByEmail(email: String)
+
+    fun findByCodeAndEmail(code: String, email: String): OtpCode?
 }

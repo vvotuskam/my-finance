@@ -6,6 +6,7 @@ import my.finance.accountservice.feature.transaction.domain.validator.TransferVa
 import my.finance.accountservice.feature.transaction.rest.dto.request.TransferRequest
 import my.finance.accountservice.feature.transaction.rest.mapper.TransferMapper
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -14,13 +15,14 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/account/transaction")
-class TransactionController(
+class TransferController(
     private val transferValidator: TransferValidator,
     private val transferMapper: TransferMapper,
     private val transferUseCase: TransferUseCase,
 ) {
 
     @PostMapping("/transfer")
+    @PreAuthorize("isAuthenticated()")
     fun transfer(
         @RequestBody @Valid request: TransferRequest,
         result: BindingResult

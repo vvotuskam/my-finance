@@ -16,8 +16,8 @@ class AccountService(
         return accountRepository.save(account)
     }
 
-    fun findByName(name: String): Account? {
-        return accountRepository.findByNameIgnoreCase(name)
+    fun findByNameAndUser(name: String, user: User): Account? {
+        return accountRepository.findByNameIgnoreCaseAndUser(name, user)
     }
 
     fun findById(id: UUID): Account? {

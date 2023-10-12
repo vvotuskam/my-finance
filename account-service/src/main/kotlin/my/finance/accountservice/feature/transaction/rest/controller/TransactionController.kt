@@ -4,6 +4,7 @@ import my.finance.accountservice.feature.transaction.domain.usecase.HistoryUseCa
 import my.finance.accountservice.feature.transaction.rest.dto.request.HistoryRequest
 import my.finance.accountservice.feature.transaction.rest.mapper.HistoryMapper
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -18,6 +19,7 @@ class TransactionController(
 ) {
 
     @GetMapping("/history/{name}")
+    @PreAuthorize("isAuthenticated()")
     fun history(
         @PathVariable name: String,
         authentication: Authentication

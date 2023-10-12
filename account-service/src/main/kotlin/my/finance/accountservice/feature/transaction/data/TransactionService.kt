@@ -1,5 +1,7 @@
 package my.finance.accountservice.feature.transaction.data
 
+import my.finance.accountservice.core.data.entity.User
+import my.finance.accountservice.feature.account.data.Account
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -11,5 +13,9 @@ class TransactionService(
     @Transactional
     fun save(transaction: Transaction): Transaction {
         return transactionRepository.save(transaction)
+    }
+
+    fun findAllByAccount(account: Account): List<Transaction> {
+        return transactionRepository.findAllByAccount(account)
     }
 }

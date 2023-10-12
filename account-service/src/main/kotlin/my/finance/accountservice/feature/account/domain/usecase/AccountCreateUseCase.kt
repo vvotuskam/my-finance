@@ -23,7 +23,7 @@ class AccountCreateUseCase(
     override fun invoke(params: AccountCreateParams): SuccessResponse {
         val (name, user) = params
 
-        val account = accountService.findByName(name)
+        val account = accountService.findByNameAndUser(name, user)
 
         if (account != null) throw BusinessException(AccountAlreadyExistsFailure())
 

@@ -1,4 +1,4 @@
-package my.finance.accountservice.feature.organization.data.employee
+package my.finance.accountservice.feature.company.data.employee
 
 import org.springframework.stereotype.Service
 

@@ -1,4 +1,4 @@
-package my.finance.accountservice.feature.organization.data.company
+package my.finance.accountservice.feature.company.data.company
 
 import org.springframework.stereotype.Service
 

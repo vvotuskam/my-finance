@@ -1,7 +1,7 @@
-package my.finance.accountservice.feature.organization.data.company
+package my.finance.accountservice.feature.company.data.company
 
 import jakarta.persistence.*
-import my.finance.accountservice.feature.organization.data.employee.Employee
+import my.finance.accountservice.feature.company.data.employee.Employee
 import java.util.*
 
 @Entity

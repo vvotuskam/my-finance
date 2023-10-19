@@ -7,4 +7,7 @@ class SalaryTransactionService(
     private val salaryTransactionRepository: SalaryTransactionRepository
 ) {
 
+    fun saveAll(transactions: List<SalaryTransaction>): List<SalaryTransaction> {
+        return salaryTransactionRepository.saveAll(transactions)
+    }
 }

@@ -22,4 +22,8 @@ data class User(
 
     @OneToMany(mappedBy = "user")
     val accounts: List<Account>
-)
+) {
+    override fun toString(): String {
+        return "User{id=$id, email=$email, password=$password, role=$role}"
+    }
+}

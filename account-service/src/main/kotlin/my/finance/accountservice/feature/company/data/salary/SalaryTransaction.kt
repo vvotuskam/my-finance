@@ -13,7 +13,7 @@ class SalaryTransaction(
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    val id: UUID,
+    val id: UUID? = null,
 
     val amount: Double,
 

@@ -16,6 +16,10 @@ class AccountService(
         return accountRepository.save(account)
     }
 
+    fun saveAll(accounts: List<Account>): List<Account> {
+        return accountRepository.saveAll(accounts)
+    }
+
     fun findByNameAndUser(name: String, user: User): Account? {
         return accountRepository.findByNameIgnoreCaseAndUser(name, user)
     }

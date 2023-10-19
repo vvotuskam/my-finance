@@ -3,7 +3,6 @@ package my.finance.authservice.core.domain.util
 import org.springframework.stereotype.Component
 import java.security.SecureRandom
 import java.time.LocalDateTime
-import kotlin.math.exp
 
 @Component
 class OtpUtils {

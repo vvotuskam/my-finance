@@ -1,10 +1,10 @@
 package my.finance.authservice.feature.auth.rest.controller
 
 import jakarta.validation.Valid
-import my.finance.authservice.feature.auth.rest.dto.AuthRequest
 import my.finance.authservice.feature.auth.domain.mapper.AuthMapper
 import my.finance.authservice.feature.auth.domain.usecase.AuthUseCase
 import my.finance.authservice.feature.auth.domain.validator.AuthValidator
+import my.finance.authservice.feature.auth.rest.dto.AuthRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.PostMapping

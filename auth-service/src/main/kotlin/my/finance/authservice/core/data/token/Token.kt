@@ -3,7 +3,7 @@ package my.finance.authservice.core.data.token
 import jakarta.persistence.*
 import my.finance.authservice.core.data.user.User
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 @Entity
 @Table(name = "tokens")

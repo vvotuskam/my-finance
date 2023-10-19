@@ -6,14 +6,13 @@ import my.finance.accountservice.core.domain.usecase.UseCase
 import my.finance.accountservice.core.rest.dto.SuccessResponse
 import my.finance.accountservice.feature.account.data.AccountService
 import my.finance.accountservice.feature.company.data.company.CompanyService
-import my.finance.accountservice.feature.company.data.employee.EmployeeService
 import my.finance.accountservice.feature.company.data.salary.SalaryTransaction
 import my.finance.accountservice.feature.company.data.salary.SalaryTransactionService
 import my.finance.accountservice.feature.company.domain.failure.CompanyNotFoundFailure
 import my.finance.accountservice.feature.company.domain.failure.EmployeeNotFoundFailure
 import my.finance.accountservice.feature.company.domain.usecase.SalaryPayUseCase.SalaryPayParams
 import org.springframework.stereotype.Component
-import java.util.UUID
+import java.util.*
 
 @Component
 class SalaryPayUseCase(

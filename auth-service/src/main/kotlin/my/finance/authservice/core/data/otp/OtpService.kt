@@ -2,7 +2,6 @@ package my.finance.authservice.core.data.otp
 
 import my.finance.authservice.core.config.otp.OtpProperties
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
 @Service

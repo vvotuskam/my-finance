@@ -1,9 +1,9 @@
 package my.finance.authservice.core.domain.handler
 
 import com.fasterxml.jackson.databind.exc.MismatchedInputException
-import my.finance.authservice.core.domain.failure.base.Failure
-import my.finance.authservice.core.domain.failure.ValidationFailure
 import my.finance.authservice.core.domain.exception.BusinessException
+import my.finance.authservice.core.domain.failure.ValidationFailure
+import my.finance.authservice.core.domain.failure.base.Failure
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.annotation.ExceptionHandler

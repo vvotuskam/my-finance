@@ -4,7 +4,7 @@ import jakarta.persistence.*
 import my.finance.accountservice.core.data.entity.User
 import my.finance.accountservice.feature.account.data.Account
 import my.finance.accountservice.feature.company.data.company.Company
-import java.util.UUID
+import java.util.*
 
 @Entity
 @Table(name = "employees")

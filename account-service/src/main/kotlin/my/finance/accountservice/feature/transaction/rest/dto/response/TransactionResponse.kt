@@ -1,9 +1,8 @@
 package my.finance.accountservice.feature.transaction.rest.dto.response
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import my.finance.accountservice.feature.account.rest.dto.response.AccountFullResponse
 import my.finance.accountservice.feature.account.rest.dto.response.AccountResponse
-import java.util.UUID
+import java.util.*
 
 data class TransactionResponse(
 

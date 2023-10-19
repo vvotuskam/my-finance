@@ -5,7 +5,7 @@ import my.finance.accountservice.core.domain.failure.ValidationFailure
 import my.finance.accountservice.core.domain.validator.CompositeValidator
 import my.finance.accountservice.feature.company.rest.dto.request.BatchSalaryPayRequest
 import org.springframework.stereotype.Component
-import java.util.UUID
+import java.util.*
 
 @Component
 class BatchSalaryPayValidator : CompositeValidator<BatchSalaryPayRequest> {

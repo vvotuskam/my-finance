@@ -2,7 +2,6 @@ package my.finance.accountservice.feature.company.rest.mapper
 
 import my.finance.accountservice.core.config.security.SecurityUserDetails
 import my.finance.accountservice.core.rest.mapper.Mapper
-import my.finance.accountservice.feature.company.domain.usecase.RegisterEmployeeUseCase
 import my.finance.accountservice.feature.company.domain.usecase.RegisterEmployeeUseCase.RegisterParams
 import my.finance.accountservice.feature.company.rest.dto.request.RegisterEmployeeRequest
 import org.springframework.security.core.context.SecurityContextHolder

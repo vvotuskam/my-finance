@@ -1,9 +1,7 @@
 package my.finance.authservice.feature.registration.domain.usecase
 
 import my.finance.authservice.core.data.otp.OtpService
-import my.finance.authservice.core.data.otp.OtpStatus
 import my.finance.authservice.core.data.otp.OtpStatus.CONFIRMED
-import my.finance.authservice.core.data.otp.OtpStatus.REVOKED
 import my.finance.authservice.core.data.user.Role
 import my.finance.authservice.core.data.user.User
 import my.finance.authservice.core.data.user.UserService

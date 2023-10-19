@@ -1,8 +1,8 @@
 package my.finance.authservice.feature.auth.domain.validator
 
-import my.finance.authservice.core.domain.validator.Validator
-import my.finance.authservice.core.domain.failure.ValidationFailure
 import my.finance.authservice.core.domain.exception.BusinessException
+import my.finance.authservice.core.domain.failure.ValidationFailure
+import my.finance.authservice.core.domain.validator.Validator
 import org.springframework.stereotype.Component
 import org.springframework.validation.BindingResult
 

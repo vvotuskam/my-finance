@@ -4,7 +4,7 @@ import my.finance.accountservice.core.data.entity.User
 import my.finance.accountservice.core.data.repository.UserRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
-import java.util.UUID
+import java.util.*
 
 @Service
 class UserService(

@@ -1,7 +1,6 @@
 package my.finance.authservice.feature.registration.rest.controller
 
 import jakarta.validation.Valid
-import my.finance.authservice.core.rest.dto.SuccessResponse
 import my.finance.authservice.feature.registration.domain.usecase.CodeUseCase
 import my.finance.authservice.feature.registration.domain.usecase.EmailUseCase
 import my.finance.authservice.feature.registration.domain.usecase.PasswordUseCase

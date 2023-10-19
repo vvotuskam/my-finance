@@ -5,7 +5,7 @@ import my.finance.accountservice.core.data.entity.User
 import my.finance.accountservice.feature.company.data.company.Company
 import my.finance.accountservice.feature.company.data.employee.Employee
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 @Entity
 @Table(name = "salary_transactions")

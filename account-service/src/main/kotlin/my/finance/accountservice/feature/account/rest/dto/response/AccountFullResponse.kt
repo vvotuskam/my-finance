@@ -1,6 +1,6 @@
 package my.finance.accountservice.feature.account.rest.dto.response
 
-import java.util.UUID
+import java.util.*
 
 data class AccountFullResponse(
     val id: UUID,

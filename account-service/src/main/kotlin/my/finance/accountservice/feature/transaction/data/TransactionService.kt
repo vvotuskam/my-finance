@@ -1,6 +1,5 @@
 package my.finance.accountservice.feature.transaction.data
 
-import my.finance.accountservice.core.data.entity.User
 import my.finance.accountservice.feature.account.data.Account
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

@@ -1,10 +1,10 @@
 package my.finance.accountservice.feature.account.domain.usecase
 
-import my.finance.accountservice.feature.account.data.AccountService
-import my.finance.accountservice.feature.account.rest.dto.response.AccountGetResponse
-import my.finance.accountservice.feature.account.rest.dto.response.AccountFullResponse
 import my.finance.accountservice.core.domain.noparams.NoParams
 import my.finance.accountservice.core.domain.usecase.UseCase
+import my.finance.accountservice.feature.account.data.AccountService
+import my.finance.accountservice.feature.account.rest.dto.response.AccountFullResponse
+import my.finance.accountservice.feature.account.rest.dto.response.AccountGetResponse
 import org.springframework.stereotype.Component
 
 @Component

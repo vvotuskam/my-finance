@@ -2,7 +2,6 @@ package my.finance.accountservice.feature.transaction.rest.mapper
 
 import my.finance.accountservice.core.config.security.SecurityUserDetails
 import my.finance.accountservice.core.rest.mapper.Mapper
-import my.finance.accountservice.feature.transaction.domain.usecase.TransferUseCase
 import my.finance.accountservice.feature.transaction.domain.usecase.TransferUseCase.TransferParams
 import my.finance.accountservice.feature.transaction.rest.dto.request.TransferRequest
 import org.springframework.security.core.context.SecurityContextHolder

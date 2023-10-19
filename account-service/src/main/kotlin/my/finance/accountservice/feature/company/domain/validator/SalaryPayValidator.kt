@@ -4,7 +4,6 @@ import my.finance.accountservice.core.domain.exception.BusinessException
 import my.finance.accountservice.core.domain.failure.ValidationFailure
 import my.finance.accountservice.core.domain.validator.CompositeValidator
 import my.finance.accountservice.feature.company.rest.dto.request.SalaryPayRequest
-import org.hibernate.validator.constraints.UUID
 import org.springframework.stereotype.Component
 
 @Component

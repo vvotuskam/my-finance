@@ -1,9 +1,8 @@
 package my.finance.authservice.core.data.otp
 
 import jakarta.persistence.*
-import my.finance.authservice.core.data.user.User
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 @Entity
 @Table(name = "otp_codes")

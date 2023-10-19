@@ -1,9 +1,9 @@
 package my.finance.accountservice.core.data.entity
 
 import jakarta.persistence.*
-import my.finance.accountservice.feature.account.data.Account
 import my.finance.accountservice.core.data.enums.Role
-import java.util.UUID
+import my.finance.accountservice.feature.account.data.Account
+import java.util.*
 
 @Entity
 @Table(name = "users")

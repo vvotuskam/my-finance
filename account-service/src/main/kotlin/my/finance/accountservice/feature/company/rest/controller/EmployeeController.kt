@@ -6,7 +6,6 @@ import my.finance.accountservice.feature.company.domain.validator.RegisterEmploy
 import my.finance.accountservice.feature.company.rest.dto.request.RegisterEmployeeRequest
 import my.finance.accountservice.feature.company.rest.mapper.RegisterEmployeeMapper
 import org.springframework.http.ResponseEntity
-import org.springframework.security.core.Authentication
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

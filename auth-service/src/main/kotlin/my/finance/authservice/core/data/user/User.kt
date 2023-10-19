@@ -2,7 +2,7 @@ package my.finance.authservice.core.data.user
 
 import jakarta.persistence.*
 import my.finance.authservice.core.data.token.Token
-import java.util.UUID
+import java.util.*
 
 @Entity
 @Table(name = "users")

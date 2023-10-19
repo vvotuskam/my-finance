@@ -14,10 +14,10 @@ import my.finance.accountservice.feature.company.data.employee.EmployeeService
 import my.finance.accountservice.feature.company.domain.failure.CompanyNotFoundFailure
 import my.finance.accountservice.feature.company.domain.failure.EmployeeExistsFailure
 import my.finance.accountservice.feature.company.domain.failure.InvalidSalaryFailure
-import my.finance.accountservice.feature.company.domain.usecase.RegisterEmployeeUseCase.*
+import my.finance.accountservice.feature.company.domain.usecase.RegisterEmployeeUseCase.RegisterParams
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import java.util.UUID
+import java.util.*
 
 @Component
 class RegisterEmployeeUseCase(

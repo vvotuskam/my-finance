@@ -6,7 +6,6 @@ import my.finance.accountservice.core.domain.usecase.UseCase
 import my.finance.accountservice.core.rest.dto.SuccessResponse
 import my.finance.accountservice.feature.account.data.Account
 import my.finance.accountservice.feature.account.data.AccountService
-import my.finance.accountservice.feature.company.data.company.Company
 import my.finance.accountservice.feature.company.data.company.CompanyService
 import my.finance.accountservice.feature.company.data.salary.SalaryTransaction
 import my.finance.accountservice.feature.company.data.salary.SalaryTransactionService
@@ -14,7 +13,7 @@ import my.finance.accountservice.feature.company.domain.failure.CompanyNotFoundF
 import my.finance.accountservice.feature.company.domain.usecase.BatchSalaryPayUseCase.BatchSalaryParams
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import java.util.UUID
+import java.util.*
 
 @Component
 class BatchSalaryPayUseCase(

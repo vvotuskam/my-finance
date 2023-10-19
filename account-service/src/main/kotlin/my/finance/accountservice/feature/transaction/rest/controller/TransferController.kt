@@ -6,7 +6,6 @@ import my.finance.accountservice.feature.transaction.domain.validator.TransferVa
 import my.finance.accountservice.feature.transaction.rest.dto.request.TransferRequest
 import my.finance.accountservice.feature.transaction.rest.mapper.TransferMapper
 import org.springframework.http.ResponseEntity
-import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

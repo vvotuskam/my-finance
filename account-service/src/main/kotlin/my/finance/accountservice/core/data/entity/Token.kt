@@ -1,9 +1,8 @@
 package my.finance.accountservice.core.data.entity
 
 import jakarta.persistence.*
-import my.finance.accountservice.core.data.entity.User
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 @Entity
 @Table(name = "tokens")

@@ -22,7 +22,6 @@ class TransferController(
 ) {
 
     @PostMapping("/transfer")
-    @PreAuthorize("isAuthenticated()")
     fun transfer(
         @RequestBody @Valid request: TransferRequest,
         result: BindingResult

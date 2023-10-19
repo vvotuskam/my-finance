@@ -37,7 +37,6 @@ class AccountController(
     }
 
     @GetMapping("/info")
-    @PreAuthorize("isAuthenticated()")
     fun getAccount(
         @RequestBody @Valid request: AccountGetByNameRequest,
         result: BindingResult,
@@ -48,7 +47,6 @@ class AccountController(
     }
 
     @PostMapping("/create")
-    @PreAuthorize("isAuthenticated()")
     fun createAccount(
         @Valid @RequestBody request: AccountCreateRequest,
         result: BindingResult,

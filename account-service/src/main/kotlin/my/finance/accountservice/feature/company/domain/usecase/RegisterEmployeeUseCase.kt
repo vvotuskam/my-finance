@@ -1,5 +1,6 @@
 package my.finance.accountservice.feature.company.domain.usecase
 
+import my.finance.accountservice.core.data.entity.User
 import my.finance.accountservice.core.data.service.UserService
 import my.finance.accountservice.core.domain.exception.BusinessException
 import my.finance.accountservice.core.domain.failure.UserNotFoundFailure
@@ -27,6 +28,7 @@ class RegisterEmployeeUseCase(
 ): UseCase<RegisterParams, SuccessResponse> {
 
     data class RegisterParams(
+        val admin: User,
         val name: String,
         val surname: String,
         val salary: Double,
@@ -37,7 +39,7 @@ class RegisterEmployeeUseCase(
 
     @Transactional
     override fun invoke(params: RegisterParams): SuccessResponse {
-        val (name, surname, salary, accountId, userId, companyId) = params
+        val (admin, name, surname, salary, accountId, userId, companyId) = params
 
         if (salary < 1) throw BusinessException(InvalidSalaryFailure())
 
@@ -49,6 +51,8 @@ class RegisterEmployeeUseCase(
 
         val account = accountService.findById(accountId)
             ?: throw BusinessException(AccountNotFoundFailure())
+
+        if (company.admin.id != admin.id) throw BusinessException(CompanyNotFoundFailure())
 
         if (account.user != user) throw BusinessException(AccountNotFoundFailure())
 

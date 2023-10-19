@@ -19,7 +19,6 @@ class TransactionController(
 ) {
 
     @GetMapping("/history/{name}")
-    @PreAuthorize("isAuthenticated()")
     fun history(
         @PathVariable name: String,
         authentication: Authentication

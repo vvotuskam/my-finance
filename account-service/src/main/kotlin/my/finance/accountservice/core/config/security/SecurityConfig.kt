@@ -25,7 +25,7 @@ class SecurityConfig(
         http
             .cors { it.disable() }
             .csrf { it.disable() }
-            .authorizeHttpRequests { it.anyRequest().permitAll() }
+            .authorizeHttpRequests { it.anyRequest().authenticated() }
             .exceptionHandling {
                 it.authenticationEntryPoint { _, response, _ ->
                     val body = objectMapper.writeValueAsString(UnauthorizedFailure())

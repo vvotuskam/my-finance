@@ -6,4 +6,7 @@ import org.springframework.stereotype.Service
 class EmployeeService(
     private val employeeRepository: EmployeeRepository
 ) {
+    fun save(employee: Employee): Employee {
+        return employeeRepository.save(employee)
+    }
 }

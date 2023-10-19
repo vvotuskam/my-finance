@@ -12,6 +12,7 @@ class RegisterEmployeeValidator : Validator {
     companion object {
         private const val NAME = "name"
         private const val SURNAME = "surname"
+        private const val SALARY = "salary"
         private const val USER_ID = "userId"
         private const val ACCOUNT_ID = "accountId"
         private const val COMPANY_ID = "companyId"
@@ -25,6 +26,8 @@ class RegisterEmployeeValidator : Validator {
         val failure =  when {
             result.hasFieldErrors(NAME) -> ValidationFailure(NAME, DEFAULT_MESSAGE)
             result.hasFieldErrors(SURNAME) -> ValidationFailure(SURNAME, DEFAULT_MESSAGE)
+
+            result.hasFieldErrors(SALARY) -> ValidationFailure(SALARY, DEFAULT_MESSAGE)
 
             result.hasFieldErrors(USER_ID) -> ValidationFailure(USER_ID, UUID_MESSAGE)
             result.hasFieldErrors(ACCOUNT_ID) -> ValidationFailure(ACCOUNT_ID, UUID_MESSAGE)

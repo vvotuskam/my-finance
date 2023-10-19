@@ -18,6 +18,8 @@ data class Employee(
 
     val surname: String,
 
+    val salary: Double,
+
     @OneToOne
     @JoinColumn(name = "account_id")
     val account: Account,
@@ -28,5 +30,5 @@ data class Employee(
 
     @ManyToOne
     @JoinColumn(name = "company_id")
-    val company: Company
+    val company: Company,
 )

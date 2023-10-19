@@ -12,6 +12,7 @@ import my.finance.accountservice.feature.company.data.employee.Employee
 import my.finance.accountservice.feature.company.data.employee.EmployeeService
 import my.finance.accountservice.feature.company.domain.failure.CompanyNotFoundFailure
 import my.finance.accountservice.feature.company.domain.failure.EmployeeExistsFailure
+import my.finance.accountservice.feature.company.domain.failure.InvalidSalaryFailure
 import my.finance.accountservice.feature.company.domain.usecase.RegisterEmployeeUseCase.*
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
@@ -28,6 +29,7 @@ class RegisterEmployeeUseCase(
     data class RegisterParams(
         val name: String,
         val surname: String,
+        val salary: Double,
         val accountId: UUID,
         val userId: UUID,
         val companyId: UUID
@@ -35,7 +37,9 @@ class RegisterEmployeeUseCase(
 
     @Transactional
     override fun invoke(params: RegisterParams): SuccessResponse {
-        val (name, surname, accountId, userId, companyId) = params
+        val (name, surname, salary, accountId, userId, companyId) = params
+
+        if (salary < 1) throw BusinessException(InvalidSalaryFailure())
 
         val user = userService.findById(userId)
             ?: throw BusinessException(UserNotFoundFailure())
@@ -57,6 +61,7 @@ class RegisterEmployeeUseCase(
         val employee = Employee(
             name = name,
             surname = surname,
+            salary = salary,
             user = user,
             account = account,
             company = company

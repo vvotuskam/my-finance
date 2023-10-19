@@ -14,6 +14,7 @@ class RegisterEmployeeMapper : Mapper<RegisterEmployeeRequest, RegisterParams> {
         return RegisterParams(
             name = request.name!!,
             surname = request.surname!!,
+            salary = request.salary!!,
             userId = UUID.fromString(request.userId!!),
             accountId = UUID.fromString(request.accountId!!),
             companyId = UUID.fromString(request.companyId!!)

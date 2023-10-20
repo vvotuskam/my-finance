@@ -18,3 +18,7 @@ spring:
     jwt:
       expiration: 1
       secret: VeryStrangeSecretForJWTHS512SignatureAlgorithm64ByteLength
+
+keycloak:
+  client-id: auth-service
+  client-secret: E5jc2zxsL39qCMMnRQhjMfpqeAZsavSI

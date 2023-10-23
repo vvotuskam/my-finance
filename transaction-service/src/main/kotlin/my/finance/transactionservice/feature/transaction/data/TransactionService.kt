@@ -7,4 +7,7 @@ import javax.lang.model.type.PrimitiveType
 class TransactionService(
     private val transactionRepository: TransactionRepository
 ) {
+    fun save(transaction: Transaction): Transaction {
+        return transactionRepository.save(transaction)
+    }
 }

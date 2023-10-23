@@ -15,6 +15,7 @@ class TransactionCreateUseCase(
 ) : UseCase<CreateParams, SuccessResponse> {
 
     data class CreateParams(
+        val email: String,
         val accountId: UUID,
         val secondId: UUID,
         val amount: Double,
@@ -27,7 +28,8 @@ class TransactionCreateUseCase(
             accountId = params.accountId,
             secondId = params.secondId,
             amount = params.amount,
-            isPositive = params.isPositive
+            isPositive = params.isPositive,
+            email = params.email
         )
         transactionService.save(transaction)
         return SuccessResponse("Transaction created")

@@ -13,6 +13,7 @@ data class Transaction(
     val id: UUID? = null,
     val transferredAt: LocalDateTime = LocalDateTime.now(),
 
+    val email: String,
     val amount: Double,
     val accountId: UUID,
     val secondId: UUID,

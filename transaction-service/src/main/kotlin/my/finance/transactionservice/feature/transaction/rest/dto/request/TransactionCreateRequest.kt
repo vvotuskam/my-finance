@@ -1,4 +1,4 @@
-package my.finance.transactionservice.feature.transaction.rest.dto
+package my.finance.transactionservice.feature.transaction.rest.dto.request
 
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank

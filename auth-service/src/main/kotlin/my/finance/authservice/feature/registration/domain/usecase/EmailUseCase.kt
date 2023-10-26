@@ -4,7 +4,6 @@ import my.finance.authservice.core.config.otp.OtpProperties
 import my.finance.authservice.core.data.otp.OtpCode
 import my.finance.authservice.core.data.otp.OtpService
 import my.finance.authservice.core.data.otp.OtpStatus
-import my.finance.authservice.core.data.user.UserService
 import my.finance.authservice.core.domain.exception.BusinessException
 import my.finance.authservice.core.domain.usecase.UseCase
 import my.finance.authservice.core.domain.util.OtpUtils
@@ -17,7 +16,6 @@ import java.time.LocalDateTime
 
 @Component
 class EmailUseCase(
-    private val userService: UserService,
     private val otpService: OtpService,
     private val otpUtils: OtpUtils,
     private val otpProperties: OtpProperties,
@@ -29,9 +27,6 @@ class EmailUseCase(
 
     @Transactional
     override fun invoke(params: EmailParams): SuccessResponse {
-        val user = userService.findByEmail(params.email)
-
-        if (user != null) throw BusinessException(EmailExistsFailure())
 
         val expiresAt = LocalDateTime.now()
             .plusMinutes(otpProperties.confirmation)

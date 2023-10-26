@@ -1,10 +1,8 @@
 package my.finance.authservice.feature.registration.domain.usecase
 
+import my.finance.authservice.core.config.source.KeycloakDataSourceService
 import my.finance.authservice.core.data.otp.OtpService
 import my.finance.authservice.core.data.otp.OtpStatus.CONFIRMED
-import my.finance.authservice.core.data.user.Role
-import my.finance.authservice.core.data.user.User
-import my.finance.authservice.core.data.user.UserService
 import my.finance.authservice.core.domain.exception.BusinessException
 import my.finance.authservice.core.domain.usecase.UseCase
 import my.finance.authservice.core.domain.util.OtpUtils
@@ -12,7 +10,6 @@ import my.finance.authservice.core.rest.dto.SuccessResponse
 import my.finance.authservice.feature.registration.domain.failure.CodeNotFoundFailure
 import my.finance.authservice.feature.registration.domain.failure.CodeRevokedFailure
 import my.finance.authservice.feature.registration.domain.usecase.PasswordUseCase.PasswordParams
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
@@ -20,8 +17,7 @@ import org.springframework.transaction.annotation.Transactional
 class PasswordUseCase(
     private val otpUtils: OtpUtils,
     private val otpService: OtpService,
-    private val userService: UserService,
-    private val passwordEncoder: PasswordEncoder
+    private val keycloakDataSource: KeycloakDataSourceService
 ) : UseCase<PasswordParams, SuccessResponse> {
 
     data class PasswordParams(
@@ -40,15 +36,9 @@ class PasswordUseCase(
         if (otpCode.status != CONFIRMED || otpUtils.isExpired(otpCode.expiresAt))
             throw BusinessException(CodeRevokedFailure())
 
-        val user = User(
-            email = email,
-            password = passwordEncoder.encode(password),
-            role = Role.ROLE_USER,
-            tokens = emptyList()
-        )
-
-        userService.save(user)
         otpService.revokeAllOtp(email)
+
+        keycloakDataSource.createUser(email, password)
 
         return SuccessResponse("Registered")
     }

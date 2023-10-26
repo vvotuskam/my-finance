@@ -14,5 +14,6 @@ data class TransactionHistoryResponse(
         val accountId: UUID,
         val secondId: UUID,
         val isPositive: Boolean,
+        val description: String
     )
 }

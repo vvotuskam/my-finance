@@ -14,6 +14,7 @@ class TransactionCreateValidator : Validator {
         private const val SECOND_ID = "secondId"
         private const val AMOUNT = "amount"
         private const val IS_POSITIVE = "isPositive"
+        private const val DESCRIPTION = "description"
 
         private const val DEFAULT_MESSAGE = "Field is null or empty"
         private const val UUID_MESSAGE = "Field is null, empty, or not UUID"
@@ -26,6 +27,7 @@ class TransactionCreateValidator : Validator {
             result.hasFieldErrors(SECOND_ID) -> ValidationFailure(SECOND_ID, UUID_MESSAGE)
             result.hasFieldErrors(AMOUNT) -> ValidationFailure(AMOUNT, AMOUNT_MESSAGE)
             result.hasFieldErrors(IS_POSITIVE) -> ValidationFailure(IS_POSITIVE, DEFAULT_MESSAGE)
+            result.hasFieldErrors(DESCRIPTION) -> ValidationFailure(DESCRIPTION, DEFAULT_MESSAGE)
             else -> null
         }
 

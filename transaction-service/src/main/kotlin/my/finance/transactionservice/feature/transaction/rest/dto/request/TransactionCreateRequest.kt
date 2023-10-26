@@ -23,5 +23,9 @@ class TransactionCreateRequest(
     val amount: Double?,
 
     @field:NotNull
-    val isPositive: Boolean?
+    val isPositive: Boolean?,
+
+    @field:NotNull
+    @field:NotBlank
+    val description: String?
 )

@@ -19,7 +19,8 @@ class TransactionCreateUseCase(
         val accountId: UUID,
         val secondId: UUID,
         val amount: Double,
-        val isPositive: Boolean
+        val isPositive: Boolean,
+        val description: String
     )
 
     @Transactional
@@ -29,7 +30,8 @@ class TransactionCreateUseCase(
             secondId = params.secondId,
             amount = params.amount,
             isPositive = params.isPositive,
-            email = params.email
+            email = params.email,
+            description = params.description
         )
         transactionService.save(transaction)
         return SuccessResponse("Transaction created")

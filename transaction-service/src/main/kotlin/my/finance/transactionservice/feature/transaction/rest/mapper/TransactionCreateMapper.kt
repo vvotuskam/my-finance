@@ -20,7 +20,8 @@ class TransactionCreateMapper : Mapper<TransactionCreateRequest, CreateParams> {
             secondId = UUID.fromString(request.secondId),
             amount = request.amount!!,
             isPositive = request.isPositive!!,
-            email = securityUser.email
+            email = securityUser.email,
+            description = request.description!!
         )
     }
 }

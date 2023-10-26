@@ -30,7 +30,8 @@ class TransactionHistoryUseCase(
                 amount = it.amount,
                 email = it.email,
                 isPositive = it.isPositive,
-                transferredAt = it.transferredAt
+                transferredAt = it.transferredAt,
+                description = it.description
             )
         }
 

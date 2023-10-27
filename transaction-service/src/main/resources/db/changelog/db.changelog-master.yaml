@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 'create_transaction_table'
+      author: 'a.maksut'
+      changes:
+        - sqlFile:
+            path: 'changeset/create_transaction_table.sql'
+            dbms: 'postgresql'
+            encoding: 'UTF-8'
+            endDelimiter: ';'
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true

@@ -39,6 +39,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     runtimeOnly("org.postgresql:postgresql")
+    implementation("org.liquibase:liquibase-core")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 

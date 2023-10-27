@@ -4,7 +4,7 @@ databaseChangeLog:
       author: 'a.maksut'
       changes:
         - sqlFile:
-            path: 'changeset/create_account_table.sql'
+            path: 'changelog/changeset/create_account_table.sql'
             dbms: 'postgresql'
             encoding: 'UTF-8'
             endDelimiter: ';'
@@ -16,7 +16,7 @@ databaseChangeLog:
         author: 'a.maksut'
         changes:
             - sqlFile:
-                  path: 'changeset/create_company_table.sql'
+                  path: 'changelog/changeset/create_company_table.sql'
                   dbms: 'postgresql'
                   encoding: 'UTF-8'
                   endDelimiter: ';'
@@ -28,7 +28,7 @@ databaseChangeLog:
         author: 'a.maksut'
         changes:
             - sqlFile:
-                  path: 'changeset/create_employee_table.sql'
+                  path: 'changelog/changeset/create_employee_table.sql'
                   dbms: 'postgresql'
                   encoding: 'UTF-8'
                   endDelimiter: ';'

@@ -13,14 +13,12 @@ import java.util.*
 class TransactionCreateMapper : Mapper<TransactionCreateRequest, CreateParams> {
 
     override fun convert(request: TransactionCreateRequest): CreateParams {
-        val authToken = SecurityContextHolder.getContext().authentication as UsernamePasswordAuthenticationToken
-        val securityUser = authToken.principal as SecurityUser
         return CreateParams(
             accountId = UUID.fromString(request.accountId),
             secondId = UUID.fromString(request.secondId),
             amount = request.amount!!,
             isPositive = request.isPositive!!,
-            email = securityUser.email,
+            email = request.email!!,
             description = request.description!!
         )
     }

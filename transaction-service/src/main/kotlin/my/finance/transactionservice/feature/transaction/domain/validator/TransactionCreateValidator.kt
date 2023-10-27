@@ -15,8 +15,10 @@ class TransactionCreateValidator : Validator {
         private const val AMOUNT = "amount"
         private const val IS_POSITIVE = "isPositive"
         private const val DESCRIPTION = "description"
+        private const val EMAIL = "email"
 
         private const val DEFAULT_MESSAGE = "Field is null or empty"
+        private const val EMAIL_MESSAGE = "Field i null, empty, or not email"
         private const val UUID_MESSAGE = "Field is null, empty, or not UUID"
         private const val AMOUNT_MESSAGE = "Field is null, empty, or less than 100"
     }
@@ -28,6 +30,7 @@ class TransactionCreateValidator : Validator {
             result.hasFieldErrors(AMOUNT) -> ValidationFailure(AMOUNT, AMOUNT_MESSAGE)
             result.hasFieldErrors(IS_POSITIVE) -> ValidationFailure(IS_POSITIVE, DEFAULT_MESSAGE)
             result.hasFieldErrors(DESCRIPTION) -> ValidationFailure(DESCRIPTION, DEFAULT_MESSAGE)
+            result.hasFieldErrors(EMAIL) -> ValidationFailure(EMAIL, EMAIL_MESSAGE)
             else -> null
         }
 

@@ -1,7 +1,5 @@
 package my.finance.accountservice.feature.company.domain.usecase
 
-import my.finance.accountservice.core.data.entity.User
-import my.finance.accountservice.core.data.service.UserService
 import my.finance.accountservice.core.domain.exception.BusinessException
 import my.finance.accountservice.core.domain.failure.UserNotFoundFailure
 import my.finance.accountservice.core.domain.usecase.UseCase
@@ -22,43 +20,37 @@ import java.util.*
 @Component
 class RegisterEmployeeUseCase(
     private val accountService: AccountService,
-    private val userService: UserService,
     private val companyService: CompanyService,
     private val employeeService: EmployeeService
 ): UseCase<RegisterParams, SuccessResponse> {
 
     data class RegisterParams(
-        val admin: User,
+        val admin: String,
         val name: String,
         val surname: String,
         val salary: Double,
         val accountId: UUID,
-        val userId: UUID,
+        val email: String,
         val companyId: UUID
     )
 
     @Transactional
     override fun invoke(params: RegisterParams): SuccessResponse {
-        val (admin, name, surname, salary, accountId, userId, companyId) = params
+        val (admin, name, surname, salary, accountId, email, companyId) = params
 
         if (salary < 1) throw BusinessException(InvalidSalaryFailure())
-
-        val user = userService.findById(userId)
-            ?: throw BusinessException(UserNotFoundFailure())
 
         val company = companyService.findById(companyId)
             ?: throw BusinessException(CompanyNotFoundFailure())
 
-        val account = accountService.findById(accountId)
+        if (company.admin != admin) throw BusinessException(CompanyNotFoundFailure())
+
+        val account = accountService.findByIdAndEmail(accountId, email)
             ?: throw BusinessException(AccountNotFoundFailure())
-
-        if (company.admin.id != admin.id) throw BusinessException(CompanyNotFoundFailure())
-
-        if (account.user != user) throw BusinessException(AccountNotFoundFailure())
 
         val exists = company
             .employees
-            .any { it.account == account && it.user == user }
+            .any { it.account == account && it.email == email }
 
         if (exists) throw BusinessException(EmployeeExistsFailure())
 
@@ -66,7 +58,7 @@ class RegisterEmployeeUseCase(
             name = name,
             surname = surname,
             salary = salary,
-            user = user,
+            email = email,
             account = account,
             company = company
         )

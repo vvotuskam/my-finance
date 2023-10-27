@@ -16,11 +16,12 @@ spring:
       expiration: 1
       secret: VeryStrangeSecretForJWTHS512SignatureAlgorithm64ByteLength
     oauth2:
-      client:
-        registration:
-          github:
-            client-id: 114ea424ebb03b6d481f
-            client-secret: 0ff7d2fc2152a9b52dde6a7ae90694dc79d7e3e5
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8762/realms/my-finance
   jpa:
     hibernate:
       ddl-auto: update
+  main:
+    allow-bean-definition-overriding: true
+

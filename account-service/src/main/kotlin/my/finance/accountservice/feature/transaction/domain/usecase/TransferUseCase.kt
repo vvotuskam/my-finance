@@ -1,17 +1,18 @@
 package my.finance.accountservice.feature.transaction.domain.usecase
 
-import my.finance.accountservice.core.data.entity.User
+import my.finance.accountservice.core.config.security.SecurityUser
 import my.finance.accountservice.core.domain.exception.BusinessException
 import my.finance.accountservice.core.domain.usecase.UseCase
 import my.finance.accountservice.core.rest.dto.SuccessResponse
 import my.finance.accountservice.feature.account.data.AccountService
-import my.finance.accountservice.feature.transaction.data.Transaction
-import my.finance.accountservice.feature.transaction.data.TransactionService
 import my.finance.accountservice.feature.transaction.domain.failure.AccountFromNotFoundFailure
 import my.finance.accountservice.feature.transaction.domain.failure.AccountToNotFoundFailure
 import my.finance.accountservice.feature.transaction.domain.failure.InsufficientFundsFailure
 import my.finance.accountservice.feature.transaction.domain.failure.SameAccountsFailure
+import my.finance.accountservice.feature.transaction.domain.source.request.TransactionCreateRequest
+import my.finance.accountservice.feature.transaction.domain.source.service.TransactionService
 import my.finance.accountservice.feature.transaction.domain.usecase.TransferUseCase.TransferParams
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -23,19 +24,20 @@ class TransferUseCase(
 ) : UseCase<TransferParams, SuccessResponse> {
 
     data class TransferParams(
-        val user: User,
+        val email: String,
         val fromId: UUID,
         val toId: UUID,
-        val amount: Double
+        val amount: Double,
+        val description: String
     )
 
     @Transactional
     override fun invoke(params: TransferParams): SuccessResponse {
-        val (user, fromId, toId, amount) = params
+        val (email, fromId, toId, amount, description) = params
 
         if (fromId == toId) throw BusinessException(SameAccountsFailure())
 
-        val from = accountService.findByIdAndUser(fromId, user)
+        val from = accountService.findByIdAndEmail(fromId, email)
             ?: throw BusinessException(AccountFromNotFoundFailure())
 
         val to = accountService.findById(toId)
@@ -54,13 +56,19 @@ class TransferUseCase(
         accountService.save(updatedFrom)
         accountService.save(updatedTo)
 
-        val transaction = Transaction(
-            from = updatedFrom,
-            to = updatedTo,
-            amount = amount
+        val authentication = SecurityContextHolder.getContext().authentication
+        val securityUser = authentication.principal as SecurityUser
+
+        val transaction = TransactionCreateRequest(
+            accountId = fromId,
+            secondId = toId,
+            amount = amount,
+            isPositive = false,
+            description = description,
+            email = securityUser.username
         )
 
-        transactionService.save(transaction)
+        transactionService.create(transaction, securityUser)
 
         return SuccessResponse(status = "Transferred")
     }

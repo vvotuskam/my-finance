@@ -1,6 +1,6 @@
 package my.finance.accountservice.feature.account.domain.usecase
 
-import my.finance.accountservice.core.config.security.SecurityUserDetails
+import my.finance.accountservice.core.config.security.SecurityUser
 import my.finance.accountservice.core.domain.exception.BusinessException
 import my.finance.accountservice.core.domain.usecase.UseCase
 import my.finance.accountservice.feature.account.data.AccountService
@@ -21,10 +21,10 @@ class AccountGetByNameUseCase(
 
     override fun invoke(params: AccountGetByIdParams): AccountFullResponse {
         val auth = SecurityContextHolder.getContext().authentication
-        val details = auth.principal as SecurityUserDetails
-        val user = details.user
+        val securityUser = auth.principal as SecurityUser
+        val email = securityUser.username
 
-        val account = accountService.findByNameAndUser(params.name, user)
+        val account = accountService.findByNameAndEmail(params.name, email)
             ?: throw BusinessException(AccountNotFoundFailure())
 
         return AccountFullResponse(

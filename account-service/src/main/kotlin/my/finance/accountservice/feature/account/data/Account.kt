@@ -1,7 +1,6 @@
 package my.finance.accountservice.feature.account.data
 
 import jakarta.persistence.*
-import my.finance.accountservice.core.data.entity.User
 import java.util.*
 
 @Entity
@@ -16,7 +15,5 @@ data class Account(
 
     val amount: Double,
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    val user: User
+    val email: String
 )

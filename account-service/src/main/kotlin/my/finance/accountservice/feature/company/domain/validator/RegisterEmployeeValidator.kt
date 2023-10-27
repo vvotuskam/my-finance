@@ -16,9 +16,11 @@ class RegisterEmployeeValidator : Validator {
         private const val USER_ID = "userId"
         private const val ACCOUNT_ID = "accountId"
         private const val COMPANY_ID = "companyId"
+        private const val EMAIL = "email"
 
         private const val DEFAULT_MESSAGE = "Field is null or empty"
         private const val UUID_MESSAGE = "Field is null, empty, or not UUID"
+        private const val EMAIL_MESSAGE = "Field is null, empty, or not email"
     }
 
     override fun validate(result: BindingResult) {
@@ -32,6 +34,8 @@ class RegisterEmployeeValidator : Validator {
             result.hasFieldErrors(USER_ID) -> ValidationFailure(USER_ID, UUID_MESSAGE)
             result.hasFieldErrors(ACCOUNT_ID) -> ValidationFailure(ACCOUNT_ID, UUID_MESSAGE)
             result.hasFieldErrors(COMPANY_ID) -> ValidationFailure(COMPANY_ID, UUID_MESSAGE)
+
+            result.hasFieldErrors(EMAIL) -> ValidationFailure(EMAIL, EMAIL_MESSAGE)
 
             else -> null
         }

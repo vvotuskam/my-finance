@@ -1,6 +1,5 @@
 package my.finance.accountservice.feature.account.data
 
-import my.finance.accountservice.core.data.entity.User
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -20,16 +19,16 @@ class AccountService(
         return accountRepository.saveAll(accounts)
     }
 
-    fun findByNameAndUser(name: String, user: User): Account? {
-        return accountRepository.findByNameIgnoreCaseAndUser(name, user)
+    fun findByNameAndEmail(name: String, email: String): Account? {
+        return accountRepository.findByNameIgnoreCaseAndEmail(name, email)
     }
 
     fun findById(id: UUID): Account? {
         return accountRepository.findByIdOrNull(id)
     }
 
-    fun findByIdAndUser(id: UUID, user: User): Account? {
-        return accountRepository.findByIdAndUser(id, user)
+    fun findByIdAndEmail(id: UUID, email: String): Account? {
+        return accountRepository.findByIdAndEmail(id, email)
     }
 
     fun findAll(): List<Account> {

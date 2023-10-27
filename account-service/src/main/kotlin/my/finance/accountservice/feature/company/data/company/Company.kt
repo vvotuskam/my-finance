@@ -1,7 +1,6 @@
 package my.finance.accountservice.feature.company.data.company
 
 import jakarta.persistence.*
-import my.finance.accountservice.core.data.entity.User
 import my.finance.accountservice.feature.company.data.employee.Employee
 import java.util.*
 
@@ -15,8 +14,7 @@ data class Company(
 
     val name: String,
 
-    @OneToOne(fetch = FetchType.EAGER)
-    val admin: User,
+    val admin: String,
 
     @OneToMany(mappedBy = "company")
     val employees: List<Employee>

@@ -20,4 +20,8 @@ data class TransferRequest(
     @field:NotNull
     @field:Min(value = 100)
     val amount: Double?,
+
+    @field:NotNull
+    @field:NotBlank
+    val description: String?
 )

@@ -1,6 +1,5 @@
 package my.finance.accountservice.feature.account.data
 
-import my.finance.accountservice.core.data.entity.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import java.util.*
@@ -8,7 +7,7 @@ import java.util.*
 @Repository
 interface AccountRepository : JpaRepository<Account, UUID> {
 
-    fun findByNameIgnoreCaseAndUser(name: String, user: User): Account?
+    fun findByNameIgnoreCaseAndEmail(name: String, email: String): Account?
 
-    fun findByIdAndUser(id: UUID, user: User): Account?
+    fun findByIdAndEmail(id: UUID, email: String): Account?
 }

@@ -1,6 +1,5 @@
 package my.finance.accountservice.feature.account.domain.usecase
 
-import my.finance.accountservice.core.data.entity.User
 import my.finance.accountservice.core.domain.exception.BusinessException
 import my.finance.accountservice.core.domain.usecase.UseCase
 import my.finance.accountservice.core.rest.dto.SuccessResponse
@@ -17,20 +16,20 @@ class AccountCreateUseCase(
 
     data class AccountCreateParams(
         val name: String,
-        val user: User
+        val email: String
     )
 
     override fun invoke(params: AccountCreateParams): SuccessResponse {
-        val (name, user) = params
+        val (name, email) = params
 
-        val account = accountService.findByNameAndUser(name, user)
+        val account = accountService.findByNameAndEmail(name, email)
 
         if (account != null) throw BusinessException(AccountAlreadyExistsFailure())
 
         val newAccount = Account(
             name = params.name,
             amount = 0.0,
-            user = user
+            email = email
         )
 
         accountService.save(newAccount)

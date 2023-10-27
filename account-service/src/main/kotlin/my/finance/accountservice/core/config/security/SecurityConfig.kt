@@ -20,7 +20,10 @@ class SecurityConfig(
 ) {
 
     @Bean
-    fun filterChain(http: HttpSecurity): SecurityFilterChain {
+    fun filterChain(
+        http: HttpSecurity,
+        jwtConverter: JwtConverter
+    ): SecurityFilterChain {
 
         http
             .cors { it.disable() }
@@ -41,6 +44,9 @@ class SecurityConfig(
                     response.writer.write(body)
                     response.contentType = MediaType.APPLICATION_JSON_VALUE
                 }
+            }
+            .oauth2ResourceServer {
+                oauth2 -> oauth2.jwt().jwtAuthenticationConverter(jwtConverter)
             }
         return http.build()
     }

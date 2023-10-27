@@ -1,16 +1,17 @@
 package my.finance.accountservice.feature.company.domain.usecase
 
-import my.finance.accountservice.core.data.entity.User
+import my.finance.accountservice.core.config.security.SecurityUser
 import my.finance.accountservice.core.domain.exception.BusinessException
 import my.finance.accountservice.core.domain.usecase.UseCase
 import my.finance.accountservice.core.rest.dto.SuccessResponse
 import my.finance.accountservice.feature.account.data.AccountService
 import my.finance.accountservice.feature.company.data.company.CompanyService
-import my.finance.accountservice.feature.company.data.salary.SalaryTransaction
-import my.finance.accountservice.feature.company.data.salary.SalaryTransactionService
 import my.finance.accountservice.feature.company.domain.failure.CompanyNotFoundFailure
 import my.finance.accountservice.feature.company.domain.failure.EmployeeNotFoundFailure
 import my.finance.accountservice.feature.company.domain.usecase.SalaryPayUseCase.SalaryPayParams
+import my.finance.accountservice.feature.transaction.domain.source.request.TransactionCreateRequest
+import my.finance.accountservice.feature.transaction.domain.source.service.TransactionService
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import java.util.*
 
@@ -18,11 +19,11 @@ import java.util.*
 class SalaryPayUseCase(
     private val companyService: CompanyService,
     private val accountService: AccountService,
-    private val transactionService: SalaryTransactionService
+    private val transactionService: TransactionService
 ): UseCase<SalaryPayParams, SuccessResponse> {
 
     data class SalaryPayParams(
-        val admin: User,
+        val admin: String,
         val employeeId: UUID,
         val companyId: UUID
     )
@@ -33,7 +34,7 @@ class SalaryPayUseCase(
         val company = companyService.findById(companyId)
             ?: throw BusinessException(CompanyNotFoundFailure())
 
-        if (company.admin.id != admin.id) throw BusinessException(CompanyNotFoundFailure())
+        if (company.admin != admin) throw BusinessException(CompanyNotFoundFailure())
 
         val employee = company.employees.firstOrNull { it.id == employeeId }
             ?: throw BusinessException(EmployeeNotFoundFailure())
@@ -44,14 +45,17 @@ class SalaryPayUseCase(
 
         accountService.save(paidAccount)
 
-        val transaction = SalaryTransaction(
+        val transaction = TransactionCreateRequest(
             amount = employee.salary,
-            transferredBy = admin,
-            company = company,
-            employee = employee
+            accountId = employee.account.id!!,
+            secondId = companyId,
+            email = employee.email,
+            isPositive = true,
+            description = "Salary from '${company.name}'"
         )
+        val securityUser = SecurityContextHolder.getContext().authentication.principal
 
-        transactionService.saveAll(listOf(transaction))
+        transactionService.create(transaction, securityUser as SecurityUser)
 
         return SuccessResponse("Salary paid")
     }

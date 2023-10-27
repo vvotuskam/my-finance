@@ -1,7 +1,6 @@
 package my.finance.accountservice.feature.company.data.employee
 
 import jakarta.persistence.*
-import my.finance.accountservice.core.data.entity.User
 import my.finance.accountservice.feature.account.data.Account
 import my.finance.accountservice.feature.company.data.company.Company
 import java.util.*
@@ -20,13 +19,11 @@ data class Employee(
 
     val salary: Double,
 
+    val email: String,
+
     @OneToOne
     @JoinColumn(name = "account_id")
     val account: Account,
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    val user: User,
 
     @ManyToOne
     @JoinColumn(name = "company_id")

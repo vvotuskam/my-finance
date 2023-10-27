@@ -11,7 +11,6 @@ class AccountCreateValidator : Validator {
 
     companion object {
         private const val NAME = "name"
-        private const val USER_ID = "userId"
     }
 
     override fun validate(result: BindingResult) {

@@ -2,13 +2,17 @@ package my.finance.transactionservice.feature.transaction.rest.controller
 
 import jakarta.validation.Valid
 import my.finance.transactionservice.core.rest.dto.SuccessResponse
+import my.finance.transactionservice.feature.transaction.domain.usecase.TransactionBatchCreateUseCase
 import my.finance.transactionservice.feature.transaction.domain.usecase.TransactionCreateUseCase
 import my.finance.transactionservice.feature.transaction.domain.usecase.TransactionHistoryUseCase
+import my.finance.transactionservice.feature.transaction.domain.validator.TransactionBatchCreateValidator
 import my.finance.transactionservice.feature.transaction.domain.validator.TransactionCreateValidator
 import my.finance.transactionservice.feature.transaction.domain.validator.TransactionHistoryValidator
+import my.finance.transactionservice.feature.transaction.rest.dto.request.TransactionBatchCreateRequest
 import my.finance.transactionservice.feature.transaction.rest.dto.request.TransactionCreateRequest
 import my.finance.transactionservice.feature.transaction.rest.dto.request.TransactionHistoryRequest
 import my.finance.transactionservice.feature.transaction.rest.dto.response.TransactionHistoryResponse
+import my.finance.transactionservice.feature.transaction.rest.mapper.TransactionBatchCreateMapper
 import my.finance.transactionservice.feature.transaction.rest.mapper.TransactionCreateMapper
 import my.finance.transactionservice.feature.transaction.rest.mapper.TransactionHistoryMapper
 import org.springframework.http.ResponseEntity
@@ -29,7 +33,11 @@ class TransactionController(
 
     private val historyValidator: TransactionHistoryValidator,
     private val historyMapper: TransactionHistoryMapper,
-    private val historyUseCase: TransactionHistoryUseCase
+    private val historyUseCase: TransactionHistoryUseCase,
+
+    private val batchCreateValidator: TransactionBatchCreateValidator,
+    private val batchCreateMapper: TransactionBatchCreateMapper,
+    private val batchCreateUseCase: TransactionBatchCreateUseCase
 ) {
 
     @GetMapping("/history")
@@ -50,5 +58,15 @@ class TransactionController(
         createValidator.validate(result)
         val params = createMapper.convert(request)
         return ResponseEntity.ok(createUseCase(params))
+    }
+
+    @PostMapping("/create/batch")
+    fun batchCreate(
+        @RequestBody @Valid request: TransactionBatchCreateRequest,
+        result: BindingResult
+    ): ResponseEntity<SuccessResponse> {
+        batchCreateValidator.validate(request)
+        val params = batchCreateMapper.convert(request)
+        return ResponseEntity.ok(batchCreateUseCase(params))
     }
 }

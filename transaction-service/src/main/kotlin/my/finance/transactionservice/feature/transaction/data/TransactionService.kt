@@ -15,4 +15,8 @@ class TransactionService(
     fun findByEmailAndAccount(email: String, accountId: UUID): List<Transaction> {
         return transactionRepository.findAllByEmailAndAccountId(email, accountId)
     }
+
+    fun saveAll(transactions: List<Transaction>): List<Transaction> {
+        return transactionRepository.saveAll(transactions)
+    }
 }

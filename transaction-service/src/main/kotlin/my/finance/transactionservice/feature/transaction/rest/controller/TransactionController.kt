@@ -40,7 +40,7 @@ class TransactionController(
     private val batchCreateUseCase: TransactionBatchCreateUseCase
 ) {
 
-    @GetMapping("/history")
+    @PostMapping("/history")
     fun history(
         @RequestBody @Valid request: TransactionHistoryRequest,
         result: BindingResult

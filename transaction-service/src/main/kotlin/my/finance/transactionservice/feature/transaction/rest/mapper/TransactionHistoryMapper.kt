@@ -18,7 +18,7 @@ class TransactionHistoryMapper : Mapper<TransactionHistoryRequest, HistoryParams
         val securityUser = authToken.principal as SecurityUser
 
         return HistoryParams(
-            email = securityUser.email,
+            email = securityUser.username,
             accountId = UUID.fromString(request.accountId!!)
         )
     }
